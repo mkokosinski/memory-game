@@ -18,7 +18,7 @@ class App extends Component {
       <CookiesProvider>
         <Body>
           <Router>
-            <Route exact path='/' component={Home} />
+            <Route path='/' component={Home} />
           </Router>
         </Body>
       </CookiesProvider>
