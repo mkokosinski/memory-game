@@ -44,7 +44,7 @@ const initSquares = [
 ]
 
 const initState = {
-  squares: initSquares,
+  squares: [...initSquares],
   activeSquare: {},
   turnCounter: 0,
   gameIsEnd: false
@@ -56,7 +56,7 @@ class Game extends Component {
     super(props)
 
     this.state = {
-      squares: props.cookies.get('squares') || initSquares,
+      squares: props.cookies.get('squares') || [...initSquares],
       activeSquare: props.cookies.get('activeSquare') || {},
       turnCounter: parseInt(props.cookies.get('turnCounter')) || 0,
       gameIsEnd: false
@@ -67,7 +67,7 @@ class Game extends Component {
     const { squares, activeSquare, turnCounter } = this.state;
     let test = this.state.squares.filter(el => el.matched === false && el.turned === true).length;
     if (test < 2) {
-      const newSquares = squares.slice();
+      const newSquares = [...squares];
       const currentSquare = newSquares[sq];
       currentSquare.turned = !currentSquare.turned;
       if (currentSquare.content === activeSquare.content) {
@@ -84,14 +84,16 @@ class Game extends Component {
     if (squares.every(s => s.matched === true)) {
       this.changeEndGameFlag(true)
     }
+    console.log('state', this.state.squares);
+    console.log('initState', initState.squares);
   }
 
-  changeActiveSquare(activeSquare){
+  changeActiveSquare(activeSquare) {
     this.props.cookies.set('activeSquare', activeSquare)
-    this.setState({activeSquare});
+    this.setState({ activeSquare });
   }
 
-  changeTurnCounter(prevTurnCounter){
+  changeTurnCounter(prevTurnCounter) {
     const turnCounter = prevTurnCounter + 1;
     this.props.cookies.set('turnCounter', turnCounter);
     this.setState({ turnCounter });
@@ -102,13 +104,13 @@ class Game extends Component {
     this.setState({ squares: newSquares });
   }
 
-  changeEndGameFlag(gameIsEnd){
+  changeEndGameFlag(gameIsEnd) {
     this.props.cookies.set('gameIsEnd', gameIsEnd);
     this.setState({ gameIsEnd })
   }
 
   resetUnmatched() {
-    const newSquares = this.state.squares.slice();
+    const newSquares = [...this.state.squares];
     newSquares.forEach(elem => elem.matched === false ? elem.turned = false : elem.turned)
     this.changeSquares(newSquares);
     this.changeActiveSquare({});
@@ -119,7 +121,7 @@ class Game extends Component {
     this.props.cookies.remove('turnCounter');
     this.props.cookies.remove('activeSquare');
     this.props.cookies.remove('gameIsEnd');
-    this.setState({ ...initState });
+    this.setState({ ...JSON.parse(JSON.stringify(initState)) });
   }
 
   render() {
