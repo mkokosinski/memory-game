@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import styled from 'styled-components'
+import {CookiesProvider} from 'react-cookie'
+
 
 import Home from './components/Home'
 
@@ -13,11 +15,13 @@ const Body = styled.div`
 class App extends Component {
   render() {
     return (
-      <Body>
-        <Router>
-          <Route exact path='/' component={Home} />
-        </Router>
-      </Body>
+      <CookiesProvider>
+        <Body>
+          <Router>
+            <Route exact path='/' component={Home} />
+          </Router>
+        </Body>
+      </CookiesProvider>
     );
   }
 }

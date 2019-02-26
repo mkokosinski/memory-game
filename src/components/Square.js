@@ -43,13 +43,13 @@ const Flipper = styled.div`
 
 const Square = ({onTurn, turned, matched,content}) => {
     return (
-    <Container onClick={!turned && !matched ? onTurn : () =>alert(`Don't cheating`)}>
+    <Container onClick={!turned && !matched ? onTurn : () => {}}>
       <Flipper turned={turned}>
         <Front>
           
         </Front>
         <Back matched={matched}>
-          {content}
+          {turned && content}
         </Back>
       </Flipper>
     </Container>
