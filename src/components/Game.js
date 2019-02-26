@@ -58,7 +58,7 @@ class Game extends Component {
     this.state = {
       squares: props.cookies.get('squares') || initSquares,
       activeSquare: props.cookies.get('activeSquare') || {},
-      turnCounter: props.cookies.get('turnCounter') || 0,
+      turnCounter: parseInt(props.cookies.get('turnCounter')) || 0,
       gameIsEnd: false
     }
   }
