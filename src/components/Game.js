@@ -32,23 +32,48 @@ const Button = styled.div`
   transition: background-color ease 500ms;
   }
 `
-const initSquares = [
-  { id: 0, content: 'Q', turned: false, matched: false },
-  { id: 1, content: 'W', turned: false, matched: false },
-  { id: 2, content: 'E', turned: false, matched: false },
-  { id: 3, content: 'R', turned: false, matched: false },
-  { id: 4, content: 'E', turned: false, matched: false },
-  { id: 5, content: 'R', turned: false, matched: false },
-  { id: 6, content: 'W', turned: false, matched: false },
-  { id: 7, content: 'Q', turned: false, matched: false },
-]
 
-const initState = {
-  squares: [...initSquares],
+const generateSquares = () => {
+  const initSquares = [];
+  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let isNewPair = true;
+  let char = '';
+  for (let i = 0; i < 8; i++) {
+    if (isNewPair) char = possible.charAt(Math.floor(Math.random() * possible.length));
+
+
+    possible.replace(char, '');
+    isNewPair = !isNewPair;
+
+    initSquares.push({
+      id: i, content: char, turned: false, matched: false
+    })
+  }
+  return shuffle(initSquares);
+}
+
+const shuffle = (a) => {
+  var j, x, i;
+  for (i = a.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = a[i];
+    a[i] = a[j];
+    a[j] = x;
+  }
+
+  for (let i = 0; i < a.length; i++) {
+    a[i].id = i;
+  }
+
+  return [...a];
+}
+
+const initState = () => ({
+  squares: [...generateSquares()],
   activeSquare: {},
   turnCounter: 0,
   gameIsEnd: false
-}
+})
 
 
 class Game extends Component {
@@ -56,7 +81,7 @@ class Game extends Component {
     super(props)
 
     this.state = {
-      squares: props.cookies.get('squares') || [...initSquares],
+      squares: props.cookies.get('squares') || [...generateSquares()],
       activeSquare: props.cookies.get('activeSquare') || {},
       turnCounter: parseInt(props.cookies.get('turnCounter')) || 0,
       gameIsEnd: false
@@ -121,7 +146,7 @@ class Game extends Component {
     this.props.cookies.remove('turnCounter');
     this.props.cookies.remove('activeSquare');
     this.props.cookies.remove('gameIsEnd');
-    this.setState({ ...JSON.parse(JSON.stringify(initState)) });
+    this.setState({ ...JSON.parse(JSON.stringify(initState())) });
   }
 
   render() {
