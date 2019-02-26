@@ -63,33 +63,26 @@ class Game extends Component {
     }
   }
 
-
-
   onTurn(sq) {
     const { squares, activeSquare, turnCounter } = this.state;
     let test = this.state.squares.filter(el => el.matched === false && el.turned === true).length;
-
     if (test < 2) {
       const newSquares = squares.slice();
       const currentSquare = newSquares[sq];
       currentSquare.turned = !currentSquare.turned;
-
       if (currentSquare.content === activeSquare.content) {
         currentSquare.matched = true;
         newSquares[activeSquare.id].matched = true;
       }
-
       this.changeSquares(newSquares);
       this.changeActiveSquare(currentSquare);
     }
-
     if (test === 1) {
       this.changeTurnCounter(turnCounter);
       setTimeout(() => this.resetUnmatched(), 500);
     }
-
     if (squares.every(s => s.matched === true)) {
-      this.setState({ gameIsEnd: true })
+      this.changeEndGameFlag(true)
     }
   }
 
@@ -101,14 +94,17 @@ class Game extends Component {
   changeTurnCounter(prevTurnCounter){
     const turnCounter = prevTurnCounter + 1;
     this.props.cookies.set('turnCounter', turnCounter);
-    console.log('turn', prevTurnCounter,turnCounter);
-    
     this.setState({ turnCounter });
   }
 
   changeSquares(newSquares) {
     this.props.cookies.set('squares', newSquares);
     this.setState({ squares: newSquares });
+  }
+
+  changeEndGameFlag(gameIsEnd){
+    this.props.cookies.set('gameIsEnd', gameIsEnd);
+    this.setState({ gameIsEnd })
   }
 
   resetUnmatched() {
@@ -119,6 +115,10 @@ class Game extends Component {
   }
 
   resetGame() {
+    this.props.cookies.remove('squares');
+    this.props.cookies.remove('turnCounter');
+    this.props.cookies.remove('activeSquare');
+    this.props.cookies.remove('gameIsEnd');
     this.setState({ ...initState });
   }
 
