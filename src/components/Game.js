@@ -28,7 +28,7 @@ const Button = styled.div`
   color: #fff;
   display: block; 
   padding: 20px 10px;
-  text-align: center;
+  text-align: center; 
 
   :hover{
   background-color:#666;
