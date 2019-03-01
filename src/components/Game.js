@@ -7,10 +7,13 @@ import Square from './Square';
 
 
 const GameContainer = styled.div`
+  background-color: white;
+  box-shadow: 0 1px 5px -3px rgba(0,0,0,0.7);
   display:grid;
   grid-template-columns: 1fr;
   grid-template-rows: 20px 1fr;
   grid-gap: 5px;
+  padding: 40px 60px;
 `
 const BoardContainer = styled.div`
   display:grid;
@@ -43,7 +46,7 @@ const generateSquares = (quantityOfSquares) => {
     if (isNewPair) char = possible.charAt(Math.floor(Math.random() * possible.length));
 
 
-    possible.replace(char, '');
+    possible = possible.replace(char, '');
     isNewPair = !isNewPair;
 
     initSquares.push({
