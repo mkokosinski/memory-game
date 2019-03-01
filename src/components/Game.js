@@ -5,13 +5,14 @@ import { withCookies } from 'react-cookie'
 import Square from './Square';
 
 
+
 const GameContainer = styled.div`
   display:grid;
   grid-template-columns: 1fr;
   grid-template-rows: 20px 1fr;
   grid-gap: 5px;
 `
-const Board = styled.div`
+const BoardContainer = styled.div`
   display:grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -33,12 +34,12 @@ const Button = styled.div`
   }
 `
 
-const generateSquares = () => {
+const generateSquares = (quantityOfSquares) => {
   const initSquares = [];
   let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   let isNewPair = true;
   let char = '';
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < quantityOfSquares; i++) {
     if (isNewPair) char = possible.charAt(Math.floor(Math.random() * possible.length));
 
 
@@ -68,8 +69,8 @@ const shuffle = (a) => {
   return [...a];
 }
 
-const initState = () => ({
-  squares: [...generateSquares()],
+const initState = (quantityOfSquares) => ({
+  squares: [...generateSquares(quantityOfSquares)],
   activeSquare: {},
   turnCounter: 0,
   gameIsEnd: false
@@ -81,7 +82,7 @@ class Game extends Component {
     super(props)
 
     this.state = {
-      squares: props.cookies.get('squares') || [...generateSquares()],
+      squares: props.cookies.get('squares') || [...generateSquares(props.quantityOfSquares)],
       activeSquare: props.cookies.get('activeSquare') || {},
       turnCounter: parseInt(props.cookies.get('turnCounter')) || 0,
       gameIsEnd: false
@@ -91,10 +92,16 @@ class Game extends Component {
   onTurn(sq) {
     const { squares, activeSquare, turnCounter } = this.state;
     let test = this.state.squares.filter(el => el.matched === false && el.turned === true).length;
+
+    if (!this.props.cookies.get('gameStarted')) {
+      this.props.cookies.set('gameStarted', true)
+    }
+
     if (test < 2) {
       const newSquares = [...squares];
       const currentSquare = newSquares[sq];
       currentSquare.turned = !currentSquare.turned;
+
       if (currentSquare.content === activeSquare.content) {
         currentSquare.matched = true;
         newSquares[activeSquare.id].matched = true;
@@ -102,15 +109,15 @@ class Game extends Component {
       this.changeSquares(newSquares);
       this.changeActiveSquare(currentSquare);
     }
+
     if (test === 1) {
       this.changeTurnCounter(turnCounter);
       setTimeout(() => this.resetUnmatched(), 500);
     }
+
     if (squares.every(s => s.matched === true)) {
       this.changeEndGameFlag(true)
     }
-    console.log('state', this.state.squares);
-    console.log('initState', initState.squares);
   }
 
   changeActiveSquare(activeSquare) {
@@ -142,11 +149,13 @@ class Game extends Component {
   }
 
   resetGame() {
-    this.props.cookies.remove('squares');
-    this.props.cookies.remove('turnCounter');
-    this.props.cookies.remove('activeSquare');
-    this.props.cookies.remove('gameIsEnd');
-    this.setState({ ...JSON.parse(JSON.stringify(initState())) });
+    const {quantityOfSquares, cookies} = this.props;
+    cookies.remove('gameStarted');
+    cookies.remove('squares');
+    cookies.remove('turnCounter');
+    cookies.remove('activeSquare');
+    cookies.remove('gameIsEnd');
+    this.setState({ ...JSON.parse(JSON.stringify(initState(quantityOfSquares))) });
   }
 
   render() {
@@ -156,13 +165,13 @@ class Game extends Component {
         <div>
           {gameIsEnd ? `Gra zakończona! Twój wynik to: ${turnCounter}` : `Ilość tur:  ${turnCounter}`}
         </div>
-        <Board>
+        <BoardContainer>
           {this.state.squares.map(
             sq => <Square {...sq} key={sq.id} onTurn={() => this.onTurn(sq.id)} />
           )}
-        </Board>
+        </BoardContainer>
         <Button onClick={() => this.resetGame()}>
-          Reset
+          {gameIsEnd ? `Zagraj ponownie`: `Reset`}
         </Button>
       </GameContainer>
     )
