@@ -2,8 +2,6 @@
 import React from 'react'
 import { withCookies } from 'react-cookie';
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
-import Img from '../assets/social/ico (1).svg'
 
 const Container = styled.div`
   min-height: 100vh;
@@ -48,9 +46,9 @@ const Item = styled.li`
 
 
 
-const Home = ({ cookies, changeQuantityOfSquares,history }) => {
+const Home = ({ cookies, changeQuantityOfSquares, history }) => {
   const canResume = cookies.get('gameStarted') || cookies.get('gameStarted');
-  const newGameHandler = () =>{
+  const newGameHandler = () => {
     cookies.remove('gameStarted');
     cookies.remove('squares');
     cookies.remove('turnCounter');
@@ -59,12 +57,18 @@ const Home = ({ cookies, changeQuantityOfSquares,history }) => {
 
     history.push('/Game')
   }
-  
+
+  const resumeGameHandler = () => {
+    if (canResume) {
+      history.push('/Game')
+    }
+  }
+
   return (
     <Container>
       <MenuContainer>
         <Menu>
-          {canResume ? <Item><Link to='/Game' >Resume</Link></Item> : null}
+          {canResume ? <Item onClick={resumeGameHandler} >Resume</Item> : null}
           <Item onClick={newGameHandler}>New game</Item>
           {/* <Item>Settings</Item> */}
           <Item>Exit</Item>

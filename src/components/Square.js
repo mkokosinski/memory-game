@@ -26,6 +26,9 @@ const Card = styled(SquareSize)`
   top:0;
   user-select:none;
 
+  img{
+    width:70%;
+  }
 `
 
 const Front = styled(Card)`
@@ -50,10 +53,10 @@ const Square = ({ onTurn, turned, matched, content }) => {
     <Container onClick={!turned && !matched ? onTurn : () => { }}>
       <Flipper turned={turned}>
         <Front>
-
         </Front>
         <Back matched={matched}>
-          {turned && content}
+          {turned && <img src={content} alt="Tile"/>}
+          
         </Back>
       </Flipper>
     </Container>

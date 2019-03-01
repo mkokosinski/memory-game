@@ -1,92 +1,35 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import { withCookies } from 'react-cookie'
+import {GameContainer, TurnCounter, BoardContainer, Button} from './GameStyles'
 
 import Square from './Square';
-import {media} from '../MobileBreakpoints'
 
-
-
-const GameContainer = styled.div`
-  background-color: white;
-  box-shadow: 0 1px 5px -3px rgba(0,0,0,0.7);
-  display:grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 20px 1fr;
-  grid-gap: 5px;
-  padding: 40px 60px;
-  justify-content:center;
-  
-
-  ${media.desktop`padding:40px 60px; `}
-  ${media.tablet`padding: 40px 40px;`}
-  ${media.phablet`padding: 20px 20px;width: 100%;`}
-  ${media.phone`padding: 20px 10px;width: 100%;`}
-`
-const BoardContainer = styled.div`
-  align-items:stretch;
-  display:grid;
-  grid-template-columns: repeat(4, 1fr);
-  justify-content:stretch;
-  /* grid-template-rows: ${props => `repeat(${props.repeat}, 120px);`}; */
-  grid-template-rows: ${props => `repeat(${props.repeat}, 1fr);`};
-  grid-gap: 5px;
-  width: 600px; height: 600px;
-
-  
-  ${media.desktop`width: 600px; height: 600px`}
-  ${media.tablet`width: 500px; height: 500px`} 
-  ${media.phablet`width: 100%; height:56vh`}
-  ${media.phone`width: 100%; height: 55vh`}
-`
-
-const TurnCounter = styled.div`
-  display: block; 
-
-
-  ${media.desktop`font-size: 1em;`}
-  ${media.tablet`font-size: 0.9em;`}
-  ${media.phablet`font-size: 0.7em;`}
-  ${media.phone`font-size: .6em;`}
-`
-
-
-const Button = styled.div`
-  background-color:#555555;
-  border: 1px solid gray;
-  color: #fff;
-  display: block; 
-  padding: 20px 10px;
-  text-align: center; 
-
-  ${media.desktop`font-size: 1em; padding: 20px 10px`}
-  ${media.tablet`font-size: 0.9em; padding: 16px 10px`}
-  ${media.phablet`font-size: 0.7em; padding: 12px 8px`}
-  ${media.phone`font-size: .6em; padding: 10px 6px`}
-
-  :hover{
-  background-color:#666;
-  cursor: pointer;
-  transition: background-color ease 500ms;
-  }
-`
+const images = (url='SocialImages') => {
+  const img = require('./' + url)
+  return [
+    img.i1,img.i2,img.i3,img.i4,img.i6,img.i7,img.i8,img.i9,img.i10,img.i11,img.i12,img.i13,img.i14,img.i15,img.i16,img.i17,img.i18,img.i19,img.i20,img.i21,img.i22,img.i23,img.i24,img.i25,img.i26,img.i27,img.i28,img.i29,img.i30,img.i31,img.i32,img.i33,img.i34,img.i35,img.i36,img.i37,img.i38,img.i39,img.i40,img.i41,img.i42,img.i43,img.i44,img.i45,img.i46,img.i47,img.i48,img.i49
+  ]
+}
 
 const generateSquares = (quantityOfSquares) => {
   const initSquares = [];
-  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let possible = images();
+  console.log(possible);
+  
   let isNewPair = true;
-  let char = '';
+  let currentImg = '';
   for (let i = 0; i < quantityOfSquares; i++) {
-    if (isNewPair) char = possible.charAt(Math.floor(Math.random() * possible.length));
+    if (isNewPair) currentImg = possible[Math.floor(Math.random() * possible.length)];
 
-
-    possible = possible.replace(char, '');
     isNewPair = !isNewPair;
+    possible.splice(possible.indexOf(currentImg),1);
 
     initSquares.push({
-      id: i, content: char, turned: false, matched: false
+      id: i, content: currentImg, turned: false, matched: false
     })
   }
+  console.log(possible);
+  
   return shuffle(initSquares);
 }
 
