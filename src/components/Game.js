@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { withCookies } from 'react-cookie'
 
 import Square from './Square';
+import {media} from '../MobileBreakpoints'
 
 
 
@@ -14,13 +15,41 @@ const GameContainer = styled.div`
   grid-template-rows: 20px 1fr;
   grid-gap: 5px;
   padding: 40px 60px;
+  justify-content:center;
+  
+
+  ${media.desktop`padding:40px 60px; `}
+  ${media.tablet`padding: 40px 40px;`}
+  ${media.phablet`padding: 20px 20px;width: 100%;`}
+  ${media.phone`padding: 20px 10px;width: 100%;`}
 `
 const BoardContainer = styled.div`
+  align-items:stretch;
   display:grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  justify-content:stretch;
+  /* grid-template-rows: ${props => `repeat(${props.repeat}, 120px);`}; */
+  grid-template-rows: ${props => `repeat(${props.repeat}, 1fr);`};
   grid-gap: 5px;
+  width: 600px; height: 600px;
+
+  
+  ${media.desktop`width: 600px; height: 600px`}
+  ${media.tablet`width: 500px; height: 500px`} 
+  ${media.phablet`width: 100%; height:56vh`}
+  ${media.phone`width: 100%; height: 55vh`}
 `
+
+const TurnCounter = styled.div`
+  display: block; 
+
+
+  ${media.desktop`font-size: 1em;`}
+  ${media.tablet`font-size: 0.9em;`}
+  ${media.phablet`font-size: 0.7em;`}
+  ${media.phone`font-size: .6em;`}
+`
+
 
 const Button = styled.div`
   background-color:#555555;
@@ -29,6 +58,11 @@ const Button = styled.div`
   display: block; 
   padding: 20px 10px;
   text-align: center; 
+
+  ${media.desktop`font-size: 1em; padding: 20px 10px`}
+  ${media.tablet`font-size: 0.9em; padding: 16px 10px`}
+  ${media.phablet`font-size: 0.7em; padding: 12px 8px`}
+  ${media.phone`font-size: .6em; padding: 10px 6px`}
 
   :hover{
   background-color:#666;
@@ -91,7 +125,7 @@ class Game extends Component {
       gameIsEnd: false
     }
   }
-
+  
   onTurn(sq) {
     const { squares, activeSquare, turnCounter } = this.state;
     let test = this.state.squares.filter(el => el.matched === false && el.turned === true).length;
@@ -163,12 +197,13 @@ class Game extends Component {
 
   render() {
     const { turnCounter, gameIsEnd } = this.state;
+    const {quantityOfSquares} = this.props;
     return (
       <GameContainer>
-        <div>
+        <TurnCounter>
           {gameIsEnd ? `Gra zakończona! Twój wynik to: ${turnCounter}` : `Ilość tur:  ${turnCounter}`}
-        </div>
-        <BoardContainer>
+        </TurnCounter>
+        <BoardContainer repeat={quantityOfSquares/4}>
           {this.state.squares.map(
             sq => <Square {...sq} key={sq.id} onTurn={() => this.onTurn(sq.id)} />
           )}

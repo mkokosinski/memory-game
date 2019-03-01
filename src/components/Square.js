@@ -2,25 +2,30 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Container = styled.div`
+
+
+const SquareSize = styled.div`
+  width:100%;
+  height:100%;
+`
+
+const Container = styled(SquareSize)`
   align-items: center;
   display: flex;
   justify-content: center;
   perspective: 1000px;
-  height: 100px;
-  width: 100px;
 `
 
-const Card = styled.div`
+const Card = styled(SquareSize)`
   align-items:center;
   backface-visibility: hidden;
   display: flex;
   justify-content: center;
-  height: 100px;
   left:0;
   position:absolute;
   top:0;
-  width: 100px;
+  user-select:none;
+
 `
 
 const Front = styled(Card)`
@@ -29,31 +34,30 @@ const Front = styled(Card)`
 `
 
 const Back = styled(Card)`
-  background-color:${props => props.matched ? 'lightsalmon' : 'lightblue' } ;
-  transition:background-color 0.3s ease 0.3s;
+  background-color:${props => props.matched ? 'lightsalmon' : 'lightblue'} ;
+  transition: background-color 0.3s ease 0.3s;
+  transform: ${props => props.turned ? 'rotateY(180deg)' : 'rotateY(0deg)'};
 `
-const Flipper = styled.div`
-	transition: 0.6s;
+const Flipper = styled(SquareSize)`
+	transition: transform 0.6s;
 	transform-style: preserve-3d;
   position: relative;
-  height: 100px;
-  width: 100px;
   transform: ${props => props.turned ? 'rotateY(0deg)' : 'rotateY(180deg)'};
 `
 
-const Square = ({onTurn, turned, matched,content}) => {
-    return (
-    <Container onClick={!turned && !matched ? onTurn : () => {}}>
+const Square = ({ onTurn, turned, matched, content }) => {
+  return (
+    <Container onClick={!turned && !matched ? onTurn : () => { }}>
       <Flipper turned={turned}>
         <Front>
-          
+
         </Front>
         <Back matched={matched}>
           {turned && content}
         </Back>
       </Flipper>
     </Container>
-    )  
+  )
 }
 
 export default Square

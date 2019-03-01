@@ -62,7 +62,6 @@ const Home = ({ cookies, changeQuantityOfSquares,history }) => {
   
   return (
     <Container>
-    <img src={Img} alt=""/>
       <MenuContainer>
         <Menu>
           {canResume ? <Item><Link to='/Game' >Resume</Link></Item> : null}
