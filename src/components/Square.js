@@ -27,7 +27,7 @@ const Card = styled(SquareSize)`
   user-select:none;
 
   img{
-    width:70%;
+    width:60%;
   }
 `
 

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 
 import Home from './components/Home'
-import Game from './components/Game'
+import Game from './components/Game/Game'
 
 const Container = styled.div`
   align-items: center;

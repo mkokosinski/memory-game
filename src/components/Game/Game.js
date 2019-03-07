@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { withCookies } from 'react-cookie'
 import {GameContainer, TurnCounter, BoardContainer, Button} from './GameStyles'
 
-import Square from './Square';
+import Square from '../Square';
 
 const images = (url='SocialImages') => {
-  const img = require('./' + url)
+  const img = require('../' + url)
   return [
     img.i1,img.i2,img.i3,img.i4,img.i6,img.i7,img.i8,img.i9,img.i10,img.i11,img.i12,img.i13,img.i14,img.i15,img.i16,img.i17,img.i18,img.i19,img.i20,img.i21,img.i22,img.i23,img.i24,img.i25,img.i26,img.i27,img.i28,img.i29,img.i30,img.i31,img.i32,img.i33,img.i34,img.i35,img.i36,img.i37,img.i38,img.i39,img.i40,img.i41,img.i42,img.i43,img.i44,img.i45,img.i46,img.i47,img.i48,img.i49
   ]
