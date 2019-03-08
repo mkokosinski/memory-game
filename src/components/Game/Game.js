@@ -14,8 +14,6 @@ const images = (url='SocialImages') => {
 const generateSquares = (quantityOfSquares) => {
   const initSquares = [];
   let possible = images();
-  console.log(possible);
-  
   let isNewPair = true;
   let currentImg = '';
   for (let i = 0; i < quantityOfSquares; i++) {
@@ -28,8 +26,6 @@ const generateSquares = (quantityOfSquares) => {
       id: i, content: currentImg, turned: false, matched: false
     })
   }
-  console.log(possible);
-  
   return shuffle(initSquares);
 }
 
@@ -41,11 +37,9 @@ const shuffle = (a) => {
     a[i] = a[j];
     a[j] = x;
   }
-
   for (let i = 0; i < a.length; i++) {
     a[i].id = i;
   }
-
   return [...a];
 }
 
