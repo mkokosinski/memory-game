@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 
-import Home from './components/Home'
+import Home from './components/Home/Home'
 import Game from './components/Game/Game'
+import Settings from './components/Home/Settings'
 
 const Container = styled.div`
   align-items: center;
@@ -25,25 +26,26 @@ export default class App extends Component {
     }
   }
 
-  changeQuantityOfSquares(q) {
+  changeQuantityOfSquares =(q) => {
+    console.log('fired',q);
+    
     this.setState({ quantityOfSquares: q })
   }
 
   render() {
-    const { quantityOfSquares, changeQuantityOfSquares } = this.state;
+    const { quantityOfSquares } = this.state;
     const GameProps = { quantityOfSquares };
+    const SettingsProps = { quantityOfSquares, changeQuantityOfSquares: this.changeQuantityOfSquares };
     return (
       <Container>
         <Router basename={process.env.PUBLIC_URL}>
           <>
-            {console.log(this.props)}
-            <SettingsCtx.Provider value={{ quantityOfSquares }}>
-              <Switch>
-                <Route exact path='/' component={(props) => <Home changeQuantityOfSquares={(q) => this.changeQuantityOfSquares(q)} {...props} />} />
-                <Route path='/Game' component={(props) => <Game {...GameProps} {...props} />} />
-                <Route component={() => (<div>404 Not found 1</div>)} />
-              </Switch>
-            </SettingsCtx.Provider>
+            <Switch>
+              <Route exact path='/' component={(props) => <Home changeQuantityOfSquares={(q) => this.changeQuantityOfSquares(q)} {...props} />} />
+              <Route path='/Game' component={(props) => <Game {...GameProps} {...props} />} />
+              <Route path='/Settings' component={(props) => <Settings {...props} {...SettingsProps} />} />
+              <Route component={() => (<div>404 Not found!</div>)} />
+            </Switch>
           </>
         </Router>
       </Container>
