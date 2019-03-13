@@ -30,7 +30,7 @@ const generateSquares = (quantityOfSquares) => {
 }
 
 const shuffle = (a) => {
-  var j, x, i;
+  let j, x, i;
   for (i = a.length - 1; i > 0; i--) {
     j = Math.floor(Math.random() * (i + 1));
     x = a[i];
@@ -65,13 +65,13 @@ class Game extends Component {
   
   onTurn(sq) {
     const { squares, activeSquare, turnCounter } = this.state;
-    let test = this.state.squares.filter(el => el.matched === false && el.turned === true).length;
+    let turnedSquaresCount = this.state.squares.filter(el => el.matched === false && el.turned === true).length;
 
     if (!this.props.cookies.get('gameStarted')) {
       this.props.cookies.set('gameStarted', true)
     }
 
-    if (test < 2) {
+    if (turnedSquaresCount < 2) {
       const newSquares = [...squares];
       const currentSquare = newSquares[sq];
       currentSquare.turned = !currentSquare.turned;
@@ -84,7 +84,7 @@ class Game extends Component {
       this.changeActiveSquare(currentSquare);
     }
 
-    if (test === 1) {
+    if (turnedSquaresCount === 1) {
       this.changeTurnCounter(turnCounter);
       setTimeout(() => this.resetUnmatched(), 500);
     }
