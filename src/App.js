@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Home from './components/Home/Home'
 import Game from './components/Game/Game'
-import Settings from './components/Home/Settings'
+import SettingsView from './components/Home/Settings'
+import { withCookies } from 'react-cookie';
 
 const Container = styled.div`
   align-items: center;
@@ -16,34 +17,39 @@ const Container = styled.div`
   width: 100%;
 `
 
-export const SettingsCtx = React.createContext(16);
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      quantityOfSquares: 16
+      Settings: {
+        quantityOfSquares: 16
+      }
     }
   }
 
-  changeQuantityOfSquares =(q) => {
-    console.log('fired',q);
-    
-    this.setState({ quantityOfSquares: q })
+  changeSettingsHandler = (newSettings) => {
+    const { cookies } = this.props;
+    cookies.remove('gameStarted');
+    cookies.remove('squares');
+    cookies.remove('turnCounter');
+    cookies.remove('activeSquare');
+    cookies.remove('gameIsEnd');
+    this.setState({ Settings: newSettings })
   }
 
   render() {
-    const { quantityOfSquares } = this.state;
-    const GameProps = { quantityOfSquares };
-    const SettingsProps = { quantityOfSquares, changeQuantityOfSquares: this.changeQuantityOfSquares };
+    const { Settings } = this.state;
+    const GameProps = { Settings };
+    const SettingsProps = { Settings, changeSettingsHandler: this.changeSettingsHandler };
     return (
       <Container>
         <Router basename={process.env.PUBLIC_URL}>
           <>
             <Switch>
-              <Route exact path='/' component={(props) => <Home changeQuantityOfSquares={(q) => this.changeQuantityOfSquares(q)} {...props} />} />
+              <Route exact path='/' component={(props) => <Home changeQuantityOfSquares={(s) => this.changeSettingsHandler(s)} {...props} />} />
               <Route path='/Game' component={(props) => <Game {...GameProps} {...props} />} />
-              <Route path='/Settings' component={(props) => <Settings {...props} {...SettingsProps} />} />
+              <Route path='/Settings' component={(props) => <SettingsView {...props} {...SettingsProps} />} />
               <Route component={() => (<div>404 Not found!</div>)} />
             </Switch>
           </>
@@ -52,3 +58,5 @@ export default class App extends Component {
     )
   }
 }
+
+export default withCookies(App);

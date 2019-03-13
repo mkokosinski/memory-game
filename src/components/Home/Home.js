@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { withCookies } from 'react-cookie';
-import {Container, Item, Menu, MenuContainer} from './HomeStyes'
+import {Container, Item, Menu} from './HomeStyes'
 
 
 const Home = ({ cookies, changeQuantityOfSquares, history }) => {
@@ -28,14 +28,12 @@ const Home = ({ cookies, changeQuantityOfSquares, history }) => {
 
   return (
     <Container>
-      <MenuContainer>
         <Menu>
           {canResume ? <Item onClick={resumeGameHandler} >Resume</Item> : null}
           <Item onClick={newGameHandler}>New game</Item>
           <Item onClick={settingsClickHandler}>Settings</Item>
           <Item>Exit</Item>
         </Menu>
-      </MenuContainer>
     </Container>
 
   )
