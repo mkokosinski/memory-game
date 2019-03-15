@@ -54,13 +54,17 @@ const initState = (quantityOfSquares) => ({
 class Game extends Component {
   constructor(props) {
     super(props)
-
+    const {difficulty} = props.settings;
     this.state = {
-      squares: props.cookies.get('squares') || [...generateSquares(props.quantityOfSquares)],
+      squares: props.cookies.get('squares') || [...generateSquares(difficulty.value)],
       activeSquare: props.cookies.get('activeSquare') || {},
       turnCounter: parseInt(props.cookies.get('turnCounter')) || 0,
       gameIsEnd: false
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    return nextState.squares !== this.state.squares
   }
   
   onTurn(sq) {
@@ -123,24 +127,27 @@ class Game extends Component {
   }
 
   resetGame() {
-    const {quantityOfSquares, cookies} = this.props;
+    const {settings, cookies} = this.props;
     cookies.remove('gameStarted');
     cookies.remove('squares');
     cookies.remove('turnCounter');
     cookies.remove('activeSquare');
     cookies.remove('gameIsEnd');
-    this.setState({ ...JSON.parse(JSON.stringify(initState(quantityOfSquares))) });
+    this.setState({ ...JSON.parse(JSON.stringify(initState(settings.difficulty.value))) });
   }
 
   render() {
     const { turnCounter, gameIsEnd } = this.state;
-    const {quantityOfSquares} = this.props;
+    const {difficulty} = this.props.settings;
+    const repeat = Math.floor(Math.sqrt(difficulty.value));
+    console.log(repeat);
+    
     return (
       <GameContainer>
         <TurnCounter>
           {gameIsEnd ? `Gra zakończona! Twój wynik to: ${turnCounter}` : `Ilość tur:  ${turnCounter}`}
         </TurnCounter>
-        <BoardContainer repeat={quantityOfSquares/4}>
+        <BoardContainer repeat={repeat}>
           {this.state.squares.map(
             sq => <Square {...sq} key={sq.id} onTurn={() => this.onTurn(sq.id)} />
           )}

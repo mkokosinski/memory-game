@@ -16,32 +16,35 @@ const Container = styled.div`
   width: 100%;
 `
 
-export const SettingsCtx = React.createContext(16);
-
 export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      quantityOfSquares: 16
+      settings: {
+        difficulty: {label: 'Łatwy', value: 16},
+        elo: '123'
+      }
     }
   }
 
-  changeQuantityOfSquares =(q) => {
-    console.log('fired',q);
+  handleChangeSettings = (sett) => {
+    // const {value,name} = sett;
+    // this.setState({settings:{...this.state.settings, [name]: value}})
+    console.log(sett);
     
-    this.setState({ quantityOfSquares: q })
+    this.setState({settings:{...sett}})
   }
 
   render() {
-    const { quantityOfSquares } = this.state;
-    const GameProps = { quantityOfSquares };
-    const SettingsProps = { quantityOfSquares, changeQuantityOfSquares: this.changeQuantityOfSquares };
+    const { settings } = this.state;
+    const GameProps = { settings };
+    const SettingsProps = { settings, changeSettings: this.handleChangeSettings };
     return (
       <Container>
         <Router basename={process.env.PUBLIC_URL}>
           <>
             <Switch>
-              <Route exact path='/' component={(props) => <Home changeQuantityOfSquares={(q) => this.changeQuantityOfSquares(q)} {...props} />} />
+              <Route exact path='/' component={(props) => <Home changeQuantityOfSquares={(sett) => this.handleChangeSettings(sett)} {...props} />} />
               <Route path='/Game' component={(props) => <Game {...GameProps} {...props} />} />
               <Route path='/Settings' component={(props) => <Settings {...props} {...SettingsProps} />} />
               <Route component={() => (<div>404 Not found!</div>)} />

@@ -22,18 +22,14 @@ export const GameContainer = styled.div`
 export const BoardContainer = styled.div`
   align-items:stretch;
   display:grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: ${props => `repeat(${props.repeat}, 1fr);`};
   justify-content:stretch;
   grid-template-rows: ${props => `repeat(${props.repeat}, 1fr);`};
   grid-gap: 5px;
-  width: 100%; 
-  height: 55vh
-
+  width: 90vw; 
+  height:90vw;
   
-  ${media.phablet`width: 100%; height:56vh`}
-  ${media.tablet`width: 500px; height: 500px`} 
-  ${media.desktop`width: 500px; height: 500px;`}
-  ${media.giant`width: 600px; height: 600px`}
+  ${media.tablet`width:calc(100vh - 200px); height:calc(100vh - 200px)`} 
 `
 
 export const TurnCounter = styled.div`

@@ -1,10 +1,9 @@
 
 import React from 'react'
 import { withCookies } from 'react-cookie';
-import {Container, Item, Menu, MenuContainer} from './HomeStyes'
+import { Container, Item, Menu, MenuContainer } from './HomeStyes'
 
-
-const Home = ({ cookies, changeQuantityOfSquares, history }) => {
+const Home = ({ cookies, history }) => {
   const canResume = cookies.get('gameStarted') || cookies.get('gameStarted');
   const newGameHandler = () => {
     cookies.remove('gameStarted');
@@ -22,7 +21,7 @@ const Home = ({ cookies, changeQuantityOfSquares, history }) => {
     }
   }
 
-  const settingsClickHandler= () =>{
+  const settingsClickHandler = () => {
     history.push('/Settings')
   }
 

@@ -58,7 +58,6 @@ class Square extends React.Component {
           </Front>
           <Back matched={matched}>
             {turned && <img src={content} alt="Tile" />}
-
           </Back>
         </Flipper>
       </Container>
