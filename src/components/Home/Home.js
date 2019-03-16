@@ -1,8 +1,12 @@
 
 import React, { useContext } from 'react'
 import { withCookies } from 'react-cookie';
+<<<<<<< HEAD
 import { Container, Item, Menu, MenuContainer } from './HomeStyes'
 import { LanguageContext } from '../Context';
+=======
+import {Container, Item, Menu} from './HomeStyes'
+>>>>>>> 5afbe8c15488350c4033c73c108624cc22d7a5e2
 
 const Home = ({ cookies, history, lan }) => {
   const lang = useContext(LanguageContext);
@@ -30,14 +34,12 @@ const Home = ({ cookies, history, lan }) => {
 
   return (
     <Container>
-      <MenuContainer>
         <Menu>
           {canResume ? <Item onClick={resumeGameHandler} >{lang.resume}</Item> : null}
           <Item onClick={newGameHandler}>{lang.newGame}</Item>
           <Item onClick={settingsClickHandler}>{lang.settings}</Item>
           <Item>{lang.exit}</Item>
         </Menu>
-      </MenuContainer>
     </Container>
 
   )

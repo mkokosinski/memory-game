@@ -56,17 +56,24 @@ class Game extends Component {
     super(props)
     const { quantityOfSquares } = props.settings;
     this.state = {
+<<<<<<< HEAD
       squares: props.cookies.get('squares') || [...generateSquares(quantityOfSquares)],
+=======
+      squares: props.cookies.get('squares') || [...generateSquares(props.Settings.quantityOfSquares)],
+>>>>>>> 5afbe8c15488350c4033c73c108624cc22d7a5e2
       activeSquare: props.cookies.get('activeSquare') || {},
       turnCounter: parseInt(props.cookies.get('turnCounter')) || 0,
       gameIsEnd: false
     }
   }
 
+<<<<<<< HEAD
   shouldComponentUpdate(nextProps, nextState) {
     return nextState.squares !== this.state.squares
   }
 
+=======
+>>>>>>> 5afbe8c15488350c4033c73c108624cc22d7a5e2
   onTurn(sq) {
     const { squares, activeSquare, turnCounter } = this.state;
     let turnedSquaresCount = this.state.squares.filter(el => el.matched === false && el.turned === true).length;
@@ -127,7 +134,11 @@ class Game extends Component {
   }
 
   resetGame() {
+<<<<<<< HEAD
     const { settings, cookies } = this.props;
+=======
+    const { quantityOfSquares, cookies } = this.props;
+>>>>>>> 5afbe8c15488350c4033c73c108624cc22d7a5e2
     cookies.remove('gameStarted');
     cookies.remove('squares');
     cookies.remove('turnCounter');
@@ -138,6 +149,7 @@ class Game extends Component {
 
   render() {
     const { turnCounter, gameIsEnd } = this.state;
+<<<<<<< HEAD
     const { quantityOfSquares } = this.props.settings;
     const repeat = Math.floor(Math.sqrt(quantityOfSquares));
     console.log(repeat);
@@ -161,6 +173,23 @@ class Game extends Component {
         )}
       </LanguageContext.Consumer>
 
+=======
+    const { quantityOfSquares } = this.props.Settings;
+    return (
+      <GameContainer>
+        <TurnCounter>
+          {gameIsEnd ? `Gra zakończona! Twój wynik to: ${turnCounter}` : `Ilość tur:  ${turnCounter}`}
+        </TurnCounter>
+        <BoardContainer repeat={quantityOfSquares / 4}>
+          {this.state.squares.map(
+            sq => <Square {...sq} key={sq.id} onTurn={() => this.onTurn(sq.id)} />
+          )}
+        </BoardContainer>
+        <Button onClick={() => this.resetGame()}>
+          {gameIsEnd ? `Zagraj ponownie` : `Reset`}
+        </Button>
+      </GameContainer>
+>>>>>>> 5afbe8c15488350c4033c73c108624cc22d7a5e2
     )
   }
 }
