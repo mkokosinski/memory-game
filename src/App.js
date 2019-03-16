@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './components/Home/Home'
 import Game from './components/Game/Game'
 import Settings from './components/Home/Settings'
+import Lang from './components/Languages'
+import {LanguageContext} from './components/Context'
 
 const Container = styled.div`
   align-items: center;
@@ -16,13 +18,16 @@ const Container = styled.div`
   width: 100%;
 `
 
+const quantityOfSquares = [16,36];
+
 export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
       settings: {
-        difficulty: {label: 'Łatwy', value: 16},
-        elo: '123'
+        difficulty: {label: Lang['Polski'].difficulty.easy, value: 0},
+        quantityOfSquares:quantityOfSquares[0],
+        language: { label: Lang['Polski'].lang.polish, value: 1, dictionary: Lang['Polski'] }
       }
     }
   }
@@ -32,7 +37,19 @@ export default class App extends Component {
     // this.setState({settings:{...this.state.settings, [name]: value}})
     console.log(sett);
     
-    this.setState({settings:{...sett}})
+    const lang = Lang[sett.language.label];
+    this.setState({ settings: {
+      difficulty: { 
+        label: Object.values(lang.difficulty)[sett.difficulty.value],
+        value: sett.difficulty.value 
+        },
+        quantityOfSquares:quantityOfSquares[sett.difficulty.value],
+        language: { 
+          label: sett.language.label,
+           value: sett.language.value, 
+           dictionary: lang
+          }
+    } })
   }
 
   render() {
@@ -40,18 +57,18 @@ export default class App extends Component {
     const GameProps = { settings };
     const SettingsProps = { settings, changeSettings: this.handleChangeSettings };
     return (
-      <Container>
-        <Router basename={process.env.PUBLIC_URL}>
-          <>
+      <LanguageContext.Provider value={settings.language.dictionary}>
+        <Container>
+          <Router basename={process.env.PUBLIC_URL}>
             <Switch>
               <Route exact path='/' component={(props) => <Home changeQuantityOfSquares={(sett) => this.handleChangeSettings(sett)} {...props} />} />
               <Route path='/Game' component={(props) => <Game {...GameProps} {...props} />} />
               <Route path='/Settings' component={(props) => <Settings {...props} {...SettingsProps} />} />
               <Route component={() => (<div>404 Not found!</div>)} />
             </Switch>
-          </>
-        </Router>
-      </Container>
+          </Router>
+        </Container>
+      </LanguageContext.Provider>
     )
   }
 }

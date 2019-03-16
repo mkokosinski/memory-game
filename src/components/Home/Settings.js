@@ -1,37 +1,51 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Container } from './HomeStyes'
-import { SettingsContainer, Button, CenterContent, FormRow, StyledDropdown } from './SettingsStyles'
-import { Field, Formik, Form } from 'formik'
+import { SettingsContainer, Button, CenterContent, FormRow, StyledDropdown, StyledDropdownImg } from './SettingsStyles'
+import { Formik, Form } from 'formik'
+import { i1, i2 } from '../SocialImages'
 import 'react-dropdown/style.css'
+import { LanguageContext } from '../Context';
 
-const quntityOptions = [
-  {label: 'Łatwy', value: 16},{label: 'Trudny', value: 36} 
-]
+
 
 const Settings = (props) => {
-  // const handleChange = (e) => {
-  //   const { value, name } = e.target;
-  //   props.changeSettings({ value, name })
-  // }
+  const lang = useContext(LanguageContext);
+  const difficultyOptions = [
+    { label: lang.difficulty.easy, value: 0 }, { label: lang.difficulty.hard, value: 1 }
+  ]
+
+  const languageOptions = [
+    { label: lang.lang.polish, value: 0, img: i1 }, { label: lang.lang.english, value: 1, img: i2 }
+  ]
   return (
     <Container>
       <SettingsContainer>
         <Formik
+          enableReinitialize={true}
           initialValues={props.settings}
           onSubmit={(values) => props.changeSettings(values)}
-          render={({ handleBlur, setValues, handleChange, values }) => (
+          render={({ setFieldValue, values }) => (
             <Form>
-              <FormRow>
-                <label htmlFor="difficulty">Poziom</label>
+              <FormRow className="t">
+                <label htmlFor="difficulty">{lang.difficultyLabel}</label>
                 <StyledDropdown
-                  options={quntityOptions}
-                  value={{ label: values.difficulty.label, value: values.difficulty.value }}
-                  onChange={(e) => setValues({difficulty: {label: e.label, value: e.value}})}
+                  options={difficultyOptions}
+                  value={{label: values.difficulty.label, value: values.difficulty.value }}
+                  onChange={(e) => setFieldValue('difficulty', {label: e.label, value: e.value })}
                 />
               </FormRow>
+              <FormRow className="t2">
+                <label htmlFor="language">{lang.langLabel}</label>
+                <StyledDropdownImg
+                  options={languageOptions}
+                  value={{ label: values.language.label, value: 1 }}
+                  onChange={(e) => setFieldValue('language', { label: e.label, value: e.value })}
+                />
+
+              </FormRow>
               <CenterContent>
-                <Button type="submit">Zapisz</Button>
-                <Button type="button" onClick={() => props.history.goBack()}>Wróć</Button>
+                <Button type="submit">{lang.saveButton}</Button>
+                <Button type="button" onClick={() => props.history.goBack()}>{lang.goBackButton}</Button>
               </CenterContent>
             </Form>
           )}

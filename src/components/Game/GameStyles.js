@@ -47,7 +47,7 @@ export const Button = styled.div`
   color: #fff;
   display: block; 
   font-size: .6em;
-  padding: 10px 6px
+  padding: 10px 6px;
   text-align: center; 
 
   ${media.phablet`font-size: 0.7em; padding: 12px 8px`}

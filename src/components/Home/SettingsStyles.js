@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Dropdown from 'react-dropdown'
+import { i1, i2} from '../SocialImages'
 
 
 export const SettingsContainer = styled.div`
@@ -11,9 +12,40 @@ export const SettingsContainer = styled.div`
 
 export const StyledDropdown = styled(Dropdown)`
     .Dropdown-control{
+      
         }
-    .Dropdown-options{
+    .Dropdown-option{
         }
+`
+
+export const StyledDropdownImg = styled(Dropdown)`
+        /* .Dropdown-option{
+            align-items:center;
+            column-gap: 10px;
+            display:grid;
+            grid-template-columns: 1fr 4fr;
+        
+            &:before{
+                content: url('${i1}');
+                display:block;
+                height: 19px;
+                width:20px;
+            }
+        } 
+        
+        .Dropdown-control{
+        align-items:center;
+        column-gap: 10px;
+        display:grid;
+        grid-template-columns: 1fr 4fr;
+        
+            &:before{
+                content: url('${i2}');
+                display:block;
+                height: 19px;
+                width:20px;
+            }
+        } */
 `
 
 export const FormRow = styled.div`
@@ -21,6 +53,7 @@ export const FormRow = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 15px;
+    margin-top: 10px;
 `
 
 export const CenterContent = styled.div`
@@ -36,7 +69,7 @@ export const Button = styled.button`
     border: 1px solid rgba(0,0,0,.1);
     cursor: pointer;
     display: block;
-    margin: 15px 10px 0;
+    margin: 25px 10px 0;
     padding:10px;
     transition: 200ms;
     width:100px;

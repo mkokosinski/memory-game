@@ -1,9 +1,12 @@
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { withCookies } from 'react-cookie';
 import { Container, Item, Menu, MenuContainer } from './HomeStyes'
+import { LanguageContext } from '../Context';
 
-const Home = ({ cookies, history }) => {
+const Home = ({ cookies, history, lan }) => {
+  const lang = useContext(LanguageContext);
+
   const canResume = cookies.get('gameStarted') || cookies.get('gameStarted');
   const newGameHandler = () => {
     cookies.remove('gameStarted');
@@ -29,10 +32,10 @@ const Home = ({ cookies, history }) => {
     <Container>
       <MenuContainer>
         <Menu>
-          {canResume ? <Item onClick={resumeGameHandler} >Resume</Item> : null}
-          <Item onClick={newGameHandler}>New game</Item>
-          <Item onClick={settingsClickHandler}>Settings</Item>
-          <Item>Exit</Item>
+          {canResume ? <Item onClick={resumeGameHandler} >{lang.resume}</Item> : null}
+          <Item onClick={newGameHandler}>{lang.newGame}</Item>
+          <Item onClick={settingsClickHandler}>{lang.settings}</Item>
+          <Item>{lang.exit}</Item>
         </Menu>
       </MenuContainer>
     </Container>

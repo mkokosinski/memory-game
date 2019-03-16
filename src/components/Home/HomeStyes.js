@@ -12,7 +12,7 @@ export const MenuContainer = styled.ul`
     padding:40px;
 `
 export const Menu = styled.ul`
-    background-color: ${props => props.bgColor || '' }
+    background-color: ${props => props.bgColor || '' };
     border-radius:4px;
     box-shadow: 0 1px 10px -2px rgba(0,0,0,0.5);
     list-style: none;
