@@ -5,6 +5,7 @@ import { Formik, Form } from 'formik'
 import { i1, i2 } from '../SocialImages'
 import 'react-dropdown/style.css'
 import { LanguageContext } from '../Context';
+import SettingsToast from '../Toasts/SettingToasts'
 
 
 
@@ -53,6 +54,7 @@ const Settings = ({changeSettings, history}) => {
         />
 
       </SettingsContainer>
+      <SettingsToast isOpen={true} />
     </Container>
   )
 }
