@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Container } from './HomeStyes'
+import { Container } from '../Home/HomeStyes'
 import { SettingsContainer, Button, CenterContent, FormRow, StyledDropdown, StyledDropdownImg } from './SettingsStyles'
 import { Formik, Form } from 'formik'
 import { i1, i2 } from '../SocialImages'
@@ -8,8 +8,9 @@ import { LanguageContext } from '../Context';
 
 
 
-const Settings = (props) => {
-  const lang = useContext(LanguageContext);
+const Settings = ({changeSettings, history}) => {
+  const settings = useContext(LanguageContext);
+  const lang = settings.language.dictionary;
   const difficultyOptions = [
     { label: lang.difficulty.easy, value: 0 }, { label: lang.difficulty.hard, value: 1 }
   ]
@@ -22,8 +23,8 @@ const Settings = (props) => {
       <SettingsContainer>
         <Formik
           enableReinitialize={true}
-          initialValues={props.settings}
-          onSubmit={(values) => props.changeSettings(values)}
+          initialValues={settings}
+          onSubmit={(values) => changeSettings(values)}
           render={({ setFieldValue, values }) => (
             <Form>
               <FormRow className="t">
@@ -45,7 +46,7 @@ const Settings = (props) => {
               </FormRow>
               <CenterContent>
                 <Button type="submit">{lang.saveButton}</Button>
-                <Button type="button" onClick={() => props.history.goBack()}>{lang.goBackButton}</Button>
+                <Button type="button" onClick={() => history.goBack()}>{lang.goBackButton}</Button>
               </CenterContent>
             </Form>
           )}

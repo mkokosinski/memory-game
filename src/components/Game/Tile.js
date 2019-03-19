@@ -2,17 +2,17 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const SquareSize = styled.div`
+const TileSize = styled.div`
   width:100%;
   height:100%;
 `
-const Container = styled(SquareSize)`
+const Container = styled(TileSize)`
   align-items: center;
   display: flex;
   justify-content: center;
   perspective: 1000px;
 `
-const Card = styled(SquareSize)`
+const Card = styled(TileSize)`
   align-items:center;
   backface-visibility: hidden;
   display: flex;
@@ -35,13 +35,13 @@ const Back = styled(Card)`
   transition: background-color 0.3s ease 0.3s;
   transform: ${props => props.turned ? 'rotateY(180deg)' : 'rotateY(0deg)'};
 `
-const Flipper = styled(SquareSize)`
+const Flipper = styled(TileSize)`
 	transition: transform 0.6s;
 	transform-style: preserve-3d;
   position: relative;
   transform: ${props => props.turned ? 'rotateY(0deg)' : 'rotateY(180deg)'};
 `
-class Square extends React.Component {
+class Tile extends React.Component {
 
   shouldComponentUpdate = (nextProps) => {
     const {turned, matched} = this.props;
@@ -65,4 +65,4 @@ class Square extends React.Component {
   }
 }
 
-export default Square
+export default Tile

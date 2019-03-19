@@ -4,38 +4,30 @@ import { withCookies } from 'react-cookie';
 import { Container, Item, Menu, MenuContainer } from './HomeStyes'
 import { LanguageContext } from '../Context';
 
-const Home = ({ cookies, history, lan }) => {
-  const lang = useContext(LanguageContext);
+const Home = ({ cookies, history }) => {
+  const lang = useContext(LanguageContext).language.dictionary;
 
   const canResume = cookies.get('gameStarted') || cookies.get('gameStarted');
   const newGameHandler = () => {
     cookies.remove('gameStarted');
-    cookies.remove('squares');
+    cookies.remove('tiles');
     cookies.remove('turnCounter');
-    cookies.remove('activeSquare');
+    cookies.remove('activeTile');
     cookies.remove('gameIsEnd');
 
     history.push('/Game')
   }
-
-  const resumeGameHandler = () => {
-    if (canResume) {
-      history.push('/Game')
-    }
-  }
-
-  const settingsClickHandler = () => {
-    history.push('/Settings')
-  }
-
+  const handleResumeClick = () => canResume ?  history.push('/Game') : null;
+  const handleSettingsClick = () => history.push('/Settings');
+  const handleExitClick = () => window.location = 'https://github.com/mkokosinski/';
   return (
     <Container>
       <MenuContainer>
         <Menu>
-          {canResume ? <Item onClick={resumeGameHandler} >{lang.resume}</Item> : null}
+          {canResume ? <Item onClick={handleResumeClick} >{lang.resume}</Item> : null}
           <Item onClick={newGameHandler}>{lang.newGame}</Item>
-          <Item onClick={settingsClickHandler}>{lang.settings}</Item>
-          <Item>{lang.exit}</Item>
+          <Item onClick={handleSettingsClick}>{lang.settings}</Item>
+          <Item onClick={handleExitClick} >{lang.exit}</Item>
         </Menu>
       </MenuContainer>
     </Container>

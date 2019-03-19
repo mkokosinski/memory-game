@@ -71,18 +71,16 @@ export const Button = styled.button`
     display: block;
     margin: 25px 10px 0;
     padding:10px;
-    transition: 200ms;
+    transition: 100ms;
     width:100px;
 
     :hover{
         background: white;
         box-shadow: 0 2px 3px -3px rgba(0,0,0,.7);
-        transform: translateY(-1px);
     }
 
     :active{
         box-shadow: none;
         outline: none;
-        transform: translateY(0);
     }
 `
