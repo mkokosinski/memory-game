@@ -1,30 +1,21 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 export const ToastContainer = styled.div`
     align-items:center;
     background:white;
-    bottom: 0;
+    box-shadow: 0 2px 10px -5px rgba(0,0,0,0.7);
     display: flex;
     justify-content:center;
     margin: 40px;
-    position: absolute;
-    height: 200px;
-    right: 0;
+    overflow:hidden;
+    padding:10px 20px;
+    transition:500ms ease-out;
     width: 200px;
 
-            opacity:1;
-
-    animation-name: showToast;
-    animation-duration: 500ms;
-    animation-delay: 500ms;
-
-    @keyframes showToast {
-        from{
-            opacity:0;
-        }
-        to{
-            opacity:1;
-        }
-        
-    }
+    ${props=> (
+        props.isOpen? 
+        `height: 100px;opacity: 1;`
+        :
+        `height: 0px;opacity: 0;`
+    )}
 `

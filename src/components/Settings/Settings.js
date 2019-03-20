@@ -1,32 +1,34 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Container } from '../Home/HomeStyes'
 import { SettingsContainer, Button, CenterContent, FormRow, StyledDropdown, StyledDropdownImg } from './SettingsStyles'
 import { Formik, Form } from 'formik'
 import { i1, i2 } from '../SocialImages'
 import 'react-dropdown/style.css'
 import { LanguageContext } from '../Context';
-import SettingsToast from '../Toasts/SettingToasts'
 
 
 
-const Settings = ({changeSettings, history}) => {
+const Settings = ({changeSettings, history, openToast}) => {
+
   const settings = useContext(LanguageContext);
   const lang = settings.language.dictionary;
   const difficultyOptions = [
     { label: lang.difficulty.easy, value: 0 }, { label: lang.difficulty.hard, value: 1 }
   ]
-
   const languageOptions = [
     { label: lang.lang.polish, value: 0, img: i1 }, { label: lang.lang.english, value: 1, img: i2 }
   ]
+  const handleSubmit = (values, actions) =>{
+    changeSettings(values);
+    openToast();
+  }
   return (
     <Container>
       <SettingsContainer>
         <Formik
-          enableReinitialize={true}
           initialValues={settings}
-          onSubmit={(values) => changeSettings(values)}
-          render={({ setFieldValue, values }) => (
+          onSubmit={(values) => handleSubmit(values)}
+          render={({ setFieldValue, values, status, isSubmitting  }) => (
             <Form>
               <FormRow className="t">
                 <label htmlFor="difficulty">{lang.difficultyLabel}</label>
@@ -46,15 +48,14 @@ const Settings = ({changeSettings, history}) => {
 
               </FormRow>
               <CenterContent>
-                <Button type="submit">{lang.saveButton}</Button>
+              {status && status.msg && <div>{status.msg}</div>}
+                <Button type="submit" disabled={isSubmitting}>{lang.saveButton}</Button>
                 <Button type="button" onClick={() => history.goBack()}>{lang.goBackButton}</Button>
               </CenterContent>
             </Form>
           )}
         />
-
       </SettingsContainer>
-      <SettingsToast isOpen={true} />
     </Container>
   )
 }

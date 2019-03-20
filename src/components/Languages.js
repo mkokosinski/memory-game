@@ -19,6 +19,7 @@
             english: 'English'
         },
         saveButton: 'Zapisz',
+        saveToastMessage: 'Zmiany zostały zapisane!',
         goBackButton: 'Wróć'
     },
     English:{
@@ -41,7 +42,8 @@
             english: 'English'
         },
         saveButton: 'Save',
-        goBackButton: 'Return'
+        saveToastMessage: 'Changes have been saved!',
+        goBackButton: 'Back'
     }
 }
 
