@@ -9,7 +9,7 @@
         resetGame: 'Resetuj',
         playAgain: 'Zagraj ponownie',
         endGameMessage: 'Gra zakończona! Twój wynik to:',
-        roundCount: 'Ilość tur:',
+        roundsCount: 'Ilość tur:',
         //settings
         difficultyLabel: 'Poziom',
         difficulty: {easy: 'Łatwy',hard: 'Trudny'},
@@ -32,7 +32,7 @@
         resetGame: 'Reset game',
         playAgain: 'Play again',
         endGameMessage: 'The game is over! Your score:',
-        roundCount: 'Round number:',
+        roundsCount: 'Round number:',
         //settings
         difficultyLabel: 'Level',
         difficulty: {easy: 'Easy',hard: 'Hard'},
@@ -42,7 +42,7 @@
             english: 'English'
         },
         saveButton: 'Save',
-        saveToastMessage: 'Changes have been saved!',
+        saveSettingsToastMessage: 'Changes have been saved!',
         goBackButton: 'Back'
     }
 }

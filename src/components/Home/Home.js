@@ -1,31 +1,33 @@
-
 import React, { useContext } from 'react'
 import { withCookies } from 'react-cookie';
-import { Container, Item, Menu, MenuContainer } from './HomeStyes'
+
+//own components
+import { CookieName, Path } from '../../config';
 import { LanguageContext } from '../Context';
+import { Container, Item, Menu, MenuContainer } from './HomeStyes'
 
 const Home = ({ cookies, history }) => {
   const lang = useContext(LanguageContext).language.dictionary;
 
-  const canResume = cookies.get('gameStarted') || cookies.get('gameStarted');
-  const newGameHandler = () => {
-    cookies.remove('gameStarted');
-    cookies.remove('tiles');
-    cookies.remove('turnCounter');
-    cookies.remove('activeTile');
-    cookies.remove('gameIsEnd');
+  const canResume = cookies.get(CookieName.GAME_STARTED) || cookies.get(CookieName.GAME_STARTED);
+  const handleStartNewGame = () => {
+    cookies.remove(CookieName.GAME_STARTED);
+    cookies.remove(CookieName.TILES);
+    cookies.remove(CookieName.ROUNDS_COUNTER);
+    cookies.remove(CookieName.ACTIVE_TILE);
+    cookies.remove(CookieName.GAME_IS_COMPLETED);
 
-    history.push('/Game')
+    history.push(Path.GAME)
   }
-  const handleResumeClick = () => canResume ?  history.push('/Game') : null;
-  const handleSettingsClick = () => history.push('/Settings');
-  const handleExitClick = () => window.location = 'https://github.com/mkokosinski/';
+  const handleResumeClick = () => canResume ?  history.push(Path.GAME) : null;
+  const handleSettingsClick = () => history.push(Path.SETTINGS);
+  const handleExitClick = () => window.location = Path.DEV_REPOSITORY;
   return (
     <Container>
       <MenuContainer>
         <Menu>
           {canResume ? <Item onClick={handleResumeClick} >{lang.resume}</Item> : null}
-          <Item onClick={newGameHandler}>{lang.newGame}</Item>
+          <Item onClick={handleStartNewGame}>{lang.newGame}</Item>
           <Item onClick={handleSettingsClick}>{lang.settings}</Item>
           <Item onClick={handleExitClick} >{lang.exit}</Item>
         </Menu>

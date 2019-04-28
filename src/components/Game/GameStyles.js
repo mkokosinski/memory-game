@@ -32,7 +32,7 @@ export const BoardContainer = styled.div`
   ${media.tablet`width:calc(100vh - 200px); height:calc(100vh - 200px)`} 
 `
 
-export const TurnCounter = styled.div`
+export const RoundsCounter = styled.div`
   display: block; 
   font-size: .6em;
 
@@ -49,6 +49,7 @@ export const Button = styled.div`
   font-size: .6em;
   padding: 10px 6px;
   text-align: center; 
+  user-select: none;
 
   ${media.phablet`font-size: 0.7em; padding: 12px 8px`}
   ${media.tablet`font-size: 0.9em; padding: 16px 10px`}
@@ -58,5 +59,10 @@ export const Button = styled.div`
   background-color:#666;
   cursor: pointer;
   transition: background-color ease 500ms;
+  }
+
+  :active{
+  background-color:#555555;
+  transition: background-color ease 200ms;
   }
 `

@@ -31,33 +31,34 @@ const Front = styled(Card)`
   transform: rotateY(180deg);
 `
 const Back = styled(Card)`
-  background-color:${props => props.matched ? 'lightsalmon' : 'lightblue'} ;
+  background-color:${props => props.isMatched ? 'lightsalmon' : 'lightblue'} ;
   transition: background-color 0.3s ease 0.3s;
-  transform: ${props => props.turned ? 'rotateY(180deg)' : 'rotateY(0deg)'};
+  transform: ${props => props.isTurned ? 'rotateY(180deg)' : 'rotateY(0deg)'};
 `
 const Flipper = styled(TileSize)`
 	transition: transform 0.6s;
 	transform-style: preserve-3d;
   position: relative;
-  transform: ${props => props.turned ? 'rotateY(0deg)' : 'rotateY(180deg)'};
+  transform: ${props => props.isTurned ? 'rotateY(0deg)' : 'rotateY(180deg)'};
 `
 class Tile extends React.Component {
 
   shouldComponentUpdate = (nextProps) => {
-    const {turned, matched} = this.props;
-    const {turned: newTurned, matched: newMatched} = nextProps;
-    return turned !== newTurned || matched !== newMatched;
+    
+    const {isTurned, isMatched} = this.props;
+    const {isTurned: newTurned, isMatched: newMatched} = nextProps;
+    return isTurned !== newTurned || isMatched !== newMatched;
   }
   
   render() {
-    const { onTurn, turned, matched, content } = this.props;
+    const { onTurn, isTurned, isMatched, content } = this.props;
     return (
-      <Container onClick={!turned && !matched ? onTurn : () => { }}>
-        <Flipper turned={turned}>
+      <Container onClick={!isTurned && !isMatched ? onTurn : () => { }}>
+        <Flipper isTurned={isTurned}>
           <Front>
           </Front>
-          <Back matched={matched}>
-            {turned && <img src={content} alt="Tile" />}
+          <Back isMatched={isMatched}>
+            {isTurned && <img src={content} alt="Tile" />}
           </Back>
         </Flipper>
       </Container>
