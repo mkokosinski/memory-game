@@ -42,7 +42,7 @@
             english: 'English'
         },
         saveButton: 'Save',
-        saveSettingsToastMessage: 'Changes have been saved!',
+        saveToastMessage: 'Changes have been saved!',
         goBackButton: 'Back'
     }
 }
