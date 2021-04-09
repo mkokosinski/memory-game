@@ -1,68 +1,61 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br />
 
-## Available Scripts
+<p align="center">
+  <a href="https://mkokosinski.github.io/memory-game/">
+    <img src="https://firebasestorage.googleapis.com/v0/b/thewordsgame-42628.appspot.com/o/memoryViews.png?alt=media&token=4fc57cc2-601e-4e4f-9a45-da29fb76efe6" alt="Logo" width=400>
+  </a>
+</p>
+<br />
 
-In the project directory, you can run:
+</div>
 
-### `npm start`
+## General Info
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The e-widencja application has been created to keep records of the journeys of company vehicles for the purposes of VAT settlement
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
 
-### `npm test`
+## Demo
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Working live demo is avaible [here](https://mkokosinski.github.io/e-widencja/)**
 
-### `npm run build`
+**Demo credentials:**
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Role  |     Login     | Password |
+| :---: | :-----------: | :------: |
+| Admin | admin@demo.pl | Demo123  |
+| User  | user@demo.pl  | Demo123  |
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br/>
 
-### `npm run eject`
+**Dynamically converted values and destinations**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  ![Mileage](https://firebasestorage.googleapis.com/v0/b/e-widencja.appspot.com/o/Mileage.gif?alt=media&token=ce9808c8-57ab-4331-82be-bbd32edad638 'Mileage')<br/><br/>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Save your trip as a template**<br/>
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  ![SaveAsTemplate](https://firebasestorage.googleapis.com/v0/b/e-widencja.appspot.com/o/SaveTemplate.gif?alt=media&token=418cf4b3-30b4-445c-afea-b3f99d243991 'SaveAsTemplate') <br/><br/>
+  
+**Customize the application to your requirements**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  ![Settings](https://firebasestorage.googleapis.com/v0/b/e-widencja.appspot.com/o/Settings.gif?alt=media&token=026f73d8-56a8-411b-a1bb-aa67d085aeb0 'Settings')<br/><br/>
 
-## Learn More
+### To Do
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Theme customization
+- Interface customization
+- Extensive permission system
+- Unit tests
+- Notification system
+- More reports
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Technologies
 
-### Code Splitting
+- <img src='https://miro.medium.com/fit/c/184/184/1*K0a7xINk0RM5gfXGSN68cw.png' width="24" height="24" />&nbsp;React
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- &nbsp;<img src='https://cdn.iconscout.com/icon/free/png-256/redux-283024.png' width="18" height="18"  />   &nbsp;Redux and Redux toolkit
 
-### Analyzing the Bundle Size
+- <img src='https://miro.medium.com/max/318/1*7jRD5QhgARucFKvRHFxpOg.png' width="24" height="24" /> &nbsp;Styled-components
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- <img src='https://www.gstatic.com/mobilesdk/160503_mobilesdk/logo/2x/firebase_28dp.png' width="24" height="24" /> &nbsp;Firebase
