@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://mkokosinski.github.io/memory-game/">
-    <img src="https://firebasestorage.googleapis.com/v0/b/thewordsgame-42628.appspot.com/o/memoryViews.png?alt=media&token=4fc57cc2-601e-4e4f-9a45-da29fb76efe6" alt="Logo" width=400>
+    <img src="https://firebasestorage.googleapis.com/v0/b/thewordsgame-42628.appspot.com/o/memory.png?alt=media&token=27d67a61-8796-46ef-9659-69bdbc4bbf5b" alt="Logo" width=400>
   </a>
 </p>
 <br />
