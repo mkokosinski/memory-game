@@ -11,51 +11,38 @@
 
 ## General Info
 
-The e-widencja application has been created to keep records of the journeys of company vehicles for the purposes of VAT settlement
+The memory game is a common game played with a set of cards. The cards have a pictures on one side and each picture appears on two cards. The game starts with all the cards face down and players take turns to turn over two cards.
 
 
 ## Demo
 
-**Working live demo is avaible [here](https://mkokosinski.github.io/e-widencja/)**
-
-**Demo credentials:**
-
-| Role  |     Login     | Password |
-| :---: | :-----------: | :------: |
-| Admin | admin@demo.pl | Demo123  |
-| User  | user@demo.pl  | Demo123  |
+**Working live demo is avaible [here](https://mkokosinski.github.io/memory-game/)**
 
 ## Features
 
 <br/>
 
-**Dynamically converted values and destinations**
+**Just enjoy the game**
 
-  ![Mileage](https://firebasestorage.googleapis.com/v0/b/e-widencja.appspot.com/o/Mileage.gif?alt=media&token=ce9808c8-57ab-4331-82be-bbd32edad638 'Mileage')<br/><br/>
+  ![Game](https://firebasestorage.googleapis.com/v0/b/thewordsgame-42628.appspot.com/o/memo-game.gif?alt=media&token=22c1786a-9ddc-46bc-808c-1a50721bbf34 'Game')<br/><br/>
 
-**Save your trip as a template**<br/>
+**Choose your language**<br/>
 
-  ![SaveAsTemplate](https://firebasestorage.googleapis.com/v0/b/e-widencja.appspot.com/o/SaveTemplate.gif?alt=media&token=418cf4b3-30b4-445c-afea-b3f99d243991 'SaveAsTemplate') <br/><br/>
+  ![Lang](https://firebasestorage.googleapis.com/v0/b/thewordsgame-42628.appspot.com/o/memo-lang.gif?alt=media&token=6dd88b74-d667-4372-9a2b-c6c1c576b9c1 'Lang') <br/>
   
-**Customize the application to your requirements**
+**Choose the difficulty level**<br/>
 
-  ![Settings](https://firebasestorage.googleapis.com/v0/b/e-widencja.appspot.com/o/Settings.gif?alt=media&token=026f73d8-56a8-411b-a1bb-aa67d085aeb0 'Settings')<br/><br/>
+  ![Level](https://firebasestorage.googleapis.com/v0/b/thewordsgame-42628.appspot.com/o/memo-level.gif?alt=media&token=44a43458-49ba-48f5-8ac1-926803117365 'Level') <br/>
+  
+ **Quit and resume the game whenever you want**<br/>
 
-### To Do
+  ![Resume](https://firebasestorage.googleapis.com/v0/b/thewordsgame-42628.appspot.com/o/memo-resume.gif?alt=media&token=ef26d71b-f89a-4187-adf1-100eb86e03ae 'Resume') <br/>
 
-- Theme customization
-- Interface customization
-- Extensive permission system
-- Unit tests
-- Notification system
-- More reports
 
 ## Technologies
 
 - <img src='https://miro.medium.com/fit/c/184/184/1*K0a7xINk0RM5gfXGSN68cw.png' width="24" height="24" />&nbsp;React
 
-- &nbsp;<img src='https://cdn.iconscout.com/icon/free/png-256/redux-283024.png' width="18" height="18"  />   &nbsp;Redux and Redux toolkit
-
 - <img src='https://miro.medium.com/max/318/1*7jRD5QhgARucFKvRHFxpOg.png' width="24" height="24" /> &nbsp;Styled-components
 
-- <img src='https://www.gstatic.com/mobilesdk/160503_mobilesdk/logo/2x/firebase_28dp.png' width="24" height="24" /> &nbsp;Firebase
+- <img src='https://firebasestorage.googleapis.com/v0/b/thewordsgame-42628.appspot.com/o/cookie.jpg?alt=media&token=e1c9f3cc-811d-48fb-9b71-d6bfef1f0010' width="24" height="24" /> &nbsp;Cookies
